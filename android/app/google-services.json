@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1086131337009",
+    "project_id": "studynotes-project",
+    "storage_bucket": "studynotes-project.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1086131337009:android:cf1fb2d6f83e1126426210",
+        "android_client_info": {
+          "package_name": "com.example.laundry_uas"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1086131337009-q62kjhgv4gvvfthu50ickbcgsft7p83m.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAd0rwcCjktrfQiq0Yh6_4mWZlsSqM2T18"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1086131337009-q62kjhgv4gvvfthu50ickbcgsft7p83m.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
