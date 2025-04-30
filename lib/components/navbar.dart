@@ -48,18 +48,15 @@ class Navbar extends StatelessWidget {
               letterSpacing: 1.5,
             ),
           ),
-
-          // Menu Items
           Row(
             children: [
               _buildMenuItem('Beranda', 'beranda'),
               _buildMenuItem('Layanan', 'layanan'),
               _buildMenuItem('Harga', 'harga'),
               _buildMenuItem('Kontak', 'kontak'),
+              _buildMenuItem('Status Pesanan', 'status'),
             ],
           ),
-
-          // Masuk & Daftar
           Row(
             children: [
               ElevatedButton(
@@ -125,38 +122,13 @@ class NavigationDrawerMobile extends StatelessWidget {
         child: ListView(
           padding: const EdgeInsets.symmetric(vertical: 20),
           children: [
-            ListTile(
-              leading: const Icon(Icons.home),
-              title: const Text('Beranda'),
-              onTap: () {
-                Navigator.pop(context);
-                onItemSelected('beranda');
-              },
-            ),
-            ListTile(
-              leading: const Icon(Icons.miscellaneous_services),
-              title: const Text('Layanan'),
-              onTap: () {
-                Navigator.pop(context);
-                onItemSelected('layanan');
-              },
-            ),
-            ListTile(
-              leading: const Icon(Icons.price_change),
-              title: const Text('Harga'),
-              onTap: () {
-                Navigator.pop(context);
-                onItemSelected('harga');
-              },
-            ),
-            ListTile(
-              leading: const Icon(Icons.phone),
-              title: const Text('Kontak'),
-              onTap: () {
-                Navigator.pop(context);
-                onItemSelected('kontak');
-              },
-            ),
+            _buildListTile(context, Icons.home, 'Beranda', 'beranda'),
+            _buildListTile(
+                context, Icons.miscellaneous_services, 'Layanan', 'layanan'),
+            _buildListTile(context, Icons.price_change, 'Harga', 'harga'),
+            _buildListTile(context, Icons.phone, 'Kontak', 'kontak'),
+            _buildListTile(context, Icons.assignment_turned_in,
+                'Status Pesanan', 'status'),
             const Divider(),
             ListTile(
               leading: const Icon(Icons.login),
@@ -171,6 +143,18 @@ class NavigationDrawerMobile extends StatelessWidget {
           ],
         ),
       ),
+    );
+  }
+
+  ListTile _buildListTile(
+      BuildContext context, IconData icon, String label, String section) {
+    return ListTile(
+      leading: Icon(icon),
+      title: Text(label),
+      onTap: () {
+        Navigator.pop(context);
+        onItemSelected(section);
+      },
     );
   }
 }

@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:laundry_uas/components/footer.dart';
 import 'package:laundry_uas/components/navbar.dart';
-
-import '../widgets/header_section.dart';
-import '../widgets/laundry_form.dart';
-import '../widgets/order_status.dart';
-import '../widgets/price_list.dart';
+import 'package:laundry_uas/widgets/header_section.dart';
+import 'package:laundry_uas/widgets/laundry_form.dart';
+import 'package:laundry_uas/widgets/order_status.dart';
+import 'package:laundry_uas/widgets/price_list.dart';
+import 'package:laundry_uas/widgets/statusPesanan.dart'; // Pastikan import halaman StatusPesanan
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -38,6 +38,13 @@ class _HomePageState extends State<HomePage> {
       case 'kontak':
         contextToScroll = _kontakKey.currentContext;
         break;
+      case 'status':
+        // Arahkan ke halaman Status Pesanan
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => DetailPesananPage()),
+        );
+        return; // Hentikan lebih lanjut karena sudah melakukan navigasi
     }
 
     if (contextToScroll != null) {
@@ -76,7 +83,6 @@ class _HomePageState extends State<HomePage> {
                       // Layanan
                       Container(key: _layananKey, child: const FormPemesanan()),
                       const SizedBox(height: 40),
-                      const StatusPesanan(),
                       const SizedBox(height: 40),
 
                       // Harga

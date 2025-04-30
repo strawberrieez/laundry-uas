@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:laundry_uas/pages/home_pages.dart';
+import 'package:laundry_uas/widgets/statusPesanan.dart';
 
 void main() {
   runApp(const LaundryApp());
@@ -13,7 +14,7 @@ class LaundryApp extends StatelessWidget {
     return MaterialApp(
       title: 'Laundry Express',
       theme: ThemeData(fontFamily: 'Sans', brightness: Brightness.light),
-      home: const HomePage(),
+      home: HomePage(),
       debugShowCheckedModeBanner: false,
     );
   }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:laundry_uas/widgets/rincianPesanan.dart';
 
 class FormPemesanan extends StatefulWidget {
   const FormPemesanan({super.key});
@@ -11,6 +12,9 @@ class _FormPemesananState extends State<FormPemesanan> {
   String? jenisLayanan;
   String pengantaran = 'Antar-Jemput';
   final TextEditingController beratController = TextEditingController();
+  final TextEditingController namaController = TextEditingController();
+  final TextEditingController alamatController = TextEditingController();
+  final TextEditingController noHpController = TextEditingController();
   final List<String> jenisPakaianDipilih = [];
 
   final List<String> jenisPakaian = [
@@ -43,6 +47,64 @@ class _FormPemesananState extends State<FormPemesanan> {
             ),
             const SizedBox(height: 32),
 
+            // Nama
+            const Text('Nama'),
+            const SizedBox(height: 8),
+            TextFormField(
+              controller: namaController,
+              decoration: const InputDecoration(
+                border: OutlineInputBorder(),
+                hintText: 'Masukkan nama lengkap',
+              ),
+              validator: (value) {
+                if (value == null || value.isEmpty) {
+                  return 'Nama harus diisi';
+                }
+                return null;
+              },
+            ),
+            const SizedBox(height: 20),
+
+            // Alamat
+            const Text('Alamat'),
+            const SizedBox(height: 8),
+            TextFormField(
+              controller: alamatController,
+              decoration: const InputDecoration(
+                border: OutlineInputBorder(),
+                hintText: 'Masukkan alamat lengkap',
+              ),
+              validator: (value) {
+                if (value == null || value.isEmpty) {
+                  return 'Alamat harus diisi';
+                }
+                return null;
+              },
+            ),
+            const SizedBox(height: 20),
+
+            // Nomor HP
+            const Text('Nomor HP'),
+            const SizedBox(height: 8),
+            TextFormField(
+              controller: noHpController,
+              keyboardType: TextInputType.phone,
+              decoration: const InputDecoration(
+                border: OutlineInputBorder(),
+                hintText: 'Masukkan nomor HP',
+              ),
+              validator: (value) {
+                if (value == null || value.isEmpty) {
+                  return 'Nomor HP harus diisi';
+                }
+                if (value.length < 10) {
+                  return 'Nomor HP tidak valid';
+                }
+                return null;
+              },
+            ),
+            const SizedBox(height: 20),
+
             // Jenis Layanan
             const Text('Jenis Layanan'),
             const SizedBox(height: 8),
@@ -68,12 +130,22 @@ class _FormPemesananState extends State<FormPemesanan> {
             // Berat Pakaian
             const Text('Berat Pakaian (Kg)'),
             const SizedBox(height: 8),
-            TextField(
+            TextFormField(
               controller: beratController,
               keyboardType: TextInputType.number,
               decoration: const InputDecoration(
                 border: OutlineInputBorder(),
+                hintText: 'Masukkan berat pakaian',
               ),
+              validator: (value) {
+                if (value == null || value.isEmpty) {
+                  return 'Berat pakaian harus diisi';
+                }
+                if (double.tryParse(value) == null) {
+                  return 'Berat harus berupa angka';
+                }
+                return null;
+              },
             ),
             const SizedBox(height: 20),
 
@@ -125,7 +197,35 @@ class _FormPemesananState extends State<FormPemesanan> {
               width: double.infinity,
               child: ElevatedButton(
                 onPressed: () {
-                  // aksi ketika submit ditekan
+                  // Validasi input
+                  if (jenisLayanan == null ||
+                      beratController.text.isEmpty ||
+                      jenisPakaianDipilih.isEmpty ||
+                      namaController.text.isEmpty ||
+                      alamatController.text.isEmpty ||
+                      noHpController.text.isEmpty) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(
+                          content: Text('Silakan lengkapi semua data')),
+                    );
+                    return;
+                  }
+
+                  // Aksi ketika tombol "Pesan Sekarang" ditekan
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => RincianPesanan(
+                        jenisLayanan: jenisLayanan ?? '',
+                        berat: beratController.text,
+                        jenisPakaian: jenisPakaianDipilih,
+                        pengantaran: pengantaran,
+                        nama: '',
+                        alamat: '',
+                        nomorHp: '',
+                      ),
+                    ),
+                  );
                 },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.black,
